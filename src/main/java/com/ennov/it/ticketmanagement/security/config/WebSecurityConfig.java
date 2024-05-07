@@ -1,6 +1,6 @@
-package org.itec.kek.admin.app.config;
+package com.ennov.it.ticketmanagement.security.config;
 
-import org.itec.kek.admin.app.filters.JwtRequestFilter;
+import com.ennov.it.ticketmanagement.security.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,17 +16,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     final String[] staticResources = {
-        "/mediasprod/**",
-        "/target/**",
-        "/static/**",
-        "/hello",
+            "/mediasprod/**",
+            "/target/**",
             "/static/**",
-        "/admin-api/**",
-        "/templates/**"
+            "/templates/**"
     };
+
     @Autowired
     private UserDetailsService myUserDetailsService;
+
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
@@ -51,15 +51,16 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().frameOptions().disable();
 
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/**").permitAll().
-                antMatchers("/downloadFile/**").permitAll().
-                antMatchers("/downloadFile**").permitAll()
-                .antMatchers(staticResources).permitAll().
-                anyRequest().authenticated().and().
-                exceptionHandling().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authorizeRequests()
+                .antMatchers("/ticket/tickets_for_current_user").authenticated() // Autoriser uniquement les utilisateurs authentifiés
+                .antMatchers(staticResources).permitAll()
+                .anyRequest().permitAll() // Autoriser toutes les autres URLs
+                .and()
+                .exceptionHandling().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         httpSecurity.cors();
     }
-
 }
+

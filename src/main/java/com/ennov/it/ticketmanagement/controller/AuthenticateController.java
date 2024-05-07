@@ -1,4 +1,4 @@
-package com.ennov.it.ticketmanagement;
+package com.ennov.it.ticketmanagement.controller;
 
 import com.ennov.it.ticketmanagement.entity.User;
 import com.ennov.it.ticketmanagement.pojo.AuthenticationResponse;

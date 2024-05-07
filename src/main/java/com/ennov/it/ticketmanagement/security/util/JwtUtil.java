@@ -1,9 +1,11 @@
-package org.itec.kek.admin.app.util;
+package com.ennov.it.ticketmanagement.security.util;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    private String SECRET_KEY = "snptgmao";
+    private String SECRET_KEY = "Ennov IT";
 
     public String extractUsername(String token)  {
           return extractClaim(token, Claims::getSubject);

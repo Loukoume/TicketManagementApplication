@@ -1,4 +1,4 @@
-package com.nayosol.lesdossier.pojo;
+package com.ennov.it.ticketmanagement.pojo;
 
 import lombok.Data;
 

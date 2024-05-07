@@ -1,4 +1,4 @@
-package com.ennov.it.ticketmanagement.tests.service;
+package com.ennov.it.ticketmanagement.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 

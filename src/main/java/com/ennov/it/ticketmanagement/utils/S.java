@@ -1,7 +1,5 @@
-package com.yaayi.gschool.utils;
+package com.ennov.it.ticketmanagement.utils;
 
-
-import com.yaayi.gschool.gschools.entity.Eleve;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -129,7 +127,7 @@ public class S {
 
         Date dateObtenu  = null, dp = assembleDate(getPartOfDate(depart, 'y'), getPartOfDate(depart, 'm'), getPartOfDate(depart, 'd'));//new Date(depart.getTime());
         if (dp != null){
-            LocalDateTime ll =   new java.sql.Timestamp(depart.getTime()).toLocalDateTime();//((Date)depart).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime ll =   new Timestamp(depart.getTime()).toLocalDateTime();//((Date)depart).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             ll = (ans >= 0)? ll.plusYears(ans) : ll.minusYears(Math.abs(ans));
             ll = (mois >= 0)? ll.plusMonths(mois) : ll.minusMonths(Math.abs(mois));
             ll = (jours >= 0)? ll.plusDays(jours) : ll.minusDays(Math.abs(jours) );
@@ -142,18 +140,7 @@ public class S {
         return dateObtenu;
     }
 
-    public static Eleve eleve() throws ParseException {
-        Eleve eleve=new Eleve();
-        String[] np=nom().split(" ");
-        eleve.setNom(np[0]);
-        eleve.setPrenom(np[1]);
-       eleve.setSex(S.randum(0,1)==1?"M":"F");
-        eleve.setNueroMatricule(S.randum(100000,999999)+"");
-        eleve.setNationalite("Togolaise");
-        eleve.setAdresse(nomtel());
-        eleve.setDateNaissance((Timestamp) addToDate(new Date(),-randum(11,20),0,0,0,0,0));
-        return eleve;
-    }
+
 
     private static String dateToString(Date addToDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
